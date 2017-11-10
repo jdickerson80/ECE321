@@ -6,62 +6,6 @@
 namespace Containters {
 namespace Nodes {
 
-template < typename dataType >
-class NodeBase
-{
-public:
-
-	typedef NodeBase< dataType > NodeBaseType;
-
-private:
-
-	dataType _data;
-	NodeBaseType* _next;
-
-public:
-
-	NodeBase()
-		: _data( NULL )
-		, _next( NULL ) {}
-
-
-	NodeBase( dataType data, NodeBaseType* next = NULL )
-		: _data( data )
-		, _next( next ) {}
-
-	dataType& data()
-	{
-		return _data;
-	}
-
-	NodeBaseType* next()
-	{
-		return _next;
-	}
-
-	void setNext( NodeBaseType* newNode )
-	{
-		_next = newNode;
-	}
-};
-
-
-template< typename dataType >
-class SLLNode : public NodeBase< dataType >
-{
-public:
-
-	typedef SLLNode< dataType > SLLNodeType;
-
-public:
-
-	SLLNode( dataType data, SLLNodeType* nextNode = NULL )
-		: NodeBase< dataType >( data, nextNode ) {}
-
-	SLLNode()
-		: NodeBase< dataType >() {}
-};
-
 template< typename dataType >
 class DLLNode
 {
@@ -71,17 +15,37 @@ public:
 
 private:
 
+	dataType _data;
+	DLLNodeType* _next;
 	DLLNodeType* _previous;
 
 public:
 
 	DLLNode( dataType data, DLLNodeType* nextNode = NULL, DLLNodeType* previousNode = NULL )
-		: NodeBase< dataType >( data, nextNode )
+		: _data( data )
+		, _next( nextNode )
 		, _previous( previousNode ){}
 
 	DLLNode()
-		: NodeBase< dataType >() {}
+		: _data( NULL )
+		, _next( NULL )
+		, _previous( NULL ){}
 
+
+	dataType& data()
+	{
+		return _data;
+	}
+
+	DLLNodeType* next()
+	{
+		return _next;
+	}
+
+	void setNext( DLLNodeType* newNode )
+	{
+		_next = newNode;
+	}
 
 	DLLNodeType* previous()
 	{

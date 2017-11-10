@@ -5,16 +5,17 @@ using namespace std;
 
 int main()
 {
-	Containters::SLLList< int > myList;
+	Containters::DLList< int > myList;
 
 	myList.print();
 	int looper = 0;
 
-	for ( ; looper < 10; ++looper )
+	for ( ; looper < 100; ++looper )
 	{
-		myList.insert( looper);
+		myList.insert( looper );
 	}
 
 	myList.print();
+	myList.printReverse();
 	return 0;
 }
