@@ -66,11 +66,6 @@ public:
 		}
 	}
 
-	void printSorted()
-	{
-
-	}
-
 	void printReverse()
 	{
 		NodeType* node = BaseType::last();
@@ -95,6 +90,12 @@ public:
 
 	void sortList( SortingFunction sortingFunction )
 	{
+		if ( BaseType::first() == BaseType::last() )
+		{
+			printf( "Sorting empty list!!!!\r\n" );
+			return;
+		}
+
 		sortingFunction( this );
 	}
 

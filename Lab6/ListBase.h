@@ -32,8 +32,6 @@ public:
 
 	virtual void print() = 0;
 
-	virtual void printSorted() = 0;
-
 	virtual void printReverse() = 0;
 
 	nodeType* first()
