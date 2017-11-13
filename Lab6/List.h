@@ -2,8 +2,8 @@
 #define LIST_H
 
 #include <stdio.h>
-#include <Node.h>
-#include <ListBase.h>
+#include "Node.h"
+#include "ListBase.h"
 
 namespace Containters {
 
@@ -90,7 +90,7 @@ public:
 
 	void sortList( SortingFunction sortingFunction )
 	{
-		if ( BaseType::first() == BaseType::last() )
+		if ( BaseType::first() == NULL || BaseType::last() == NULL )
 		{
 			printf( "Sorting empty list!!!!\r\n" );
 			return;
