@@ -12,6 +12,8 @@ class DLLNode
 public:
 
 	typedef DLLNode< dataType > DLLNodeType;
+//	typedef DLLNode* iterator;
+//	typedef const DLLNode* const const_iterator;
 
 private:
 
@@ -57,6 +59,13 @@ public:
 		_previous = newNode;
 	}
 };
+
+//template< typename nodeType >
+//typename nodeType::iterator operator++( nodeType& node )
+//{
+//	typename nodeType::iterator temp = node.next;
+//	return temp;
+//}
 
 } // namespace Nodes
 } // namespace Containters

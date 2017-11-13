@@ -2,6 +2,7 @@
 #define LISTBASE_H
 
 #include <cstddef>
+#include <vector>
 
 namespace Containters {
 
@@ -11,6 +12,10 @@ class ListBase
 public:
 
 	typedef ListBase< dataType, nodeType > ThisType;
+
+
+	typedef nodeType* iterator;
+	typedef const nodeType* const const_iterator;
 
 private:
 
@@ -51,7 +56,37 @@ public:
 		_last = newNode;
 	}
 
+	iterator begin()
+	{
+		return _first;
+	}
+
+	const_iterator being() const
+	{
+		return _first;
+	}
+
+	iterator end()
+	{
+		return _last;
+	}
+
+	const_iterator end() const
+	{
+		return _last;
+	}
+
+	void sortList( SortingFunction sortingFunction ) = 0;
+
 };
+
+template< typename nodeType >
+typename nodeType::const_iterator operator++( const nodeType& node )
+{
+	typename nodeType::const_iterator temp = node.next();
+	return temp;
+}
+
 } // namespace Containters
 
 #endif

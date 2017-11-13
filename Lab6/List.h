@@ -13,6 +13,8 @@ class DLList : public ListBase< dataType, Nodes::DLLNode< dataType > >
 public:
 
 	typedef Nodes::DLLNode< dataType > NodeType;
+	typedef DLList< dataType > ThisType;
+	typedef void (*SortingFunction)( ThisType* );
 
 private:
 
@@ -89,6 +91,11 @@ public:
 
 			printf("\r\n");
 		}
+	}
+
+	void sortList( SortingFunction sortingFunction )
+	{
+		sortingFunction( this );
 	}
 
 };
