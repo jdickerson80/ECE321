@@ -9,6 +9,7 @@ void bubbleSort( IntList* list );
 
 int main()
 {
+	int something;
 	typedef Containters::DLList< int > IntList;
 	IntList myList;
 
@@ -24,6 +25,8 @@ int main()
 
 	myList.print();
 	myList.printReverse();
+
+	scanf("%d", something );
 	return 0;
 }
 

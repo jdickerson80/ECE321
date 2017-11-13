@@ -76,8 +76,6 @@ public:
 		return _last;
 	}
 
-	void sortList( SortingFunction sortingFunction ) = 0;
-
 };
 
 template< typename nodeType >
