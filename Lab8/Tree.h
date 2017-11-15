@@ -46,26 +46,40 @@ public:
 	}
 
 	template< typename Tree, typename DataType >
-	static void balancedTreeInsert( Tree tree, DataType data )
+	static void balancedTreeInsert( Tree* tree, DataType data )
 	{
-		if ( tree == NULL )
+		if ( *tree == NULL )
 		{
-			tree = new TreeNode< DataType >( data );
+			*tree = new TreeNode< DataType >( data );
 		}
 		else
 		{
-			int leftSize = depth( tree->left );
-			int rightSize = depth( tree->right );
+			int leftSize = depth( (*tree)->left );
+			int rightSize = depth( (*tree)->right );
 
 			if ( leftSize <= rightSize )
 			{
-				balancedTreeInsert( tree->left, data );
+				balancedTreeInsert( &(*tree)->left, data );
 			}
 			else
 			{
-				balancedTreeInsert( tree->right, data );
+				balancedTreeInsert( &(*tree)->right, data );
 			}
 		}
+	}
+
+	template< typename Tree >
+	static void printDepthTraverse(Tree tree)
+	{
+		if (tree == NULL)
+		{
+			return;
+		}
+
+		printf("%d, ", tree->data);
+
+		printDepthTraverse(tree->left);
+		printDepthTraverse(tree->right);
 	}
 };
 

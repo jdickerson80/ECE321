@@ -4,19 +4,21 @@ using namespace std;
 
 int main()
 {
-	typedef Containers::TreeNode< int >* Tree;
 
-	Tree tree;
+	Containers::TreeNode< int >* tree = NULL;
 
 	int loop = 0;
 
-	for ( ; loop < 10; ++loop )
+	for (; loop < 10; ++loop)
 	{
 		// this is a change
-		Containers::TreeHelperFunctions::balancedTreeInsert( tree, loop );
+		Containers::TreeHelperFunctions::balancedTreeInsert(&tree, loop);
 	}
 
 
-	printf(" depth is %d\r\n", Containers::TreeHelperFunctions::depth( tree ) );
-	return 0;
+	printf(" depth is %d\r\n", Containers::TreeHelperFunctions::depth(tree));
+
+	Containers::TreeHelperFunctions::printDepthTraverse(tree);
+
+	scanf("%d", &loop);
 }
