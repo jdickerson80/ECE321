@@ -3,23 +3,25 @@
 
 #include <cstdlib>
 #include <algorithm>
+#include <stdio.h>
 
 namespace Containers {
+namespace Tree {
 
 template< typename DataType >
-struct TreeNode
+struct Node
 {
 	DataType data;
-	TreeNode* left;
-	TreeNode* right;
+	Node* left;
+	Node* right;
 
-	TreeNode()
+	Node()
 		: data( 0 )
 		, left( NULL )
 		, right( NULL )
 	{}
 
-	TreeNode( DataType data, TreeNode* left = NULL, TreeNode* right = NULL )
+	Node( DataType data, Node* left = NULL, Node* right = NULL )
 		: data( data )
 		, left( left )
 		, right( right )
@@ -27,11 +29,11 @@ struct TreeNode
 };
 
 
-struct TreeHelperFunctions
+struct Functions
 {
 private:
 
-	TreeHelperFunctions();
+	Functions();
 
 public:
 	template< typename Tree >
@@ -50,7 +52,7 @@ public:
 	{
 		if ( *tree == NULL )
 		{
-			*tree = new TreeNode< DataType >( data );
+			*tree = new Node< DataType >( data );
 		}
 		else
 		{
@@ -69,19 +71,37 @@ public:
 	}
 
 	template< typename Tree >
-	static void printDepthTraverse(Tree tree)
+	static void printDepthTraverse( Tree tree )
 	{
-		if (tree == NULL)
+		if ( tree == NULL )
 		{
 			return;
 		}
 
-		printf("%d, ", tree->data);
+		printf( "%d, ", tree->data );
 
-		printDepthTraverse(tree->left);
-		printDepthTraverse(tree->right);
+		printDepthTraverse( tree->left );
+		printDepthTraverse( tree->right );
+	}
+
+	template< typename Tree >
+	static float calculateProduct( Tree tree )
+	{
+		if ( tree == NULL )
+		{
+			return 1.0;
+		}
+
+		float product = tree->data;
+
+		product *= calculateProduct( tree->left );
+		product *= calculateProduct( tree->right );
+
+		return product;
 	}
 };
 
+} // typename Tree
 } // typename Containers
+
 #endif
