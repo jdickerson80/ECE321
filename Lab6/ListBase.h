@@ -6,21 +6,17 @@
 
 namespace Containters {
 
-template< typename dataType, typename nodeType >
+template< typename DataType, typename NodeType >
 class ListBase
 {
 public:
 
-	typedef ListBase< dataType, nodeType > ThisType;
-
-
-	typedef nodeType* iterator;
-	typedef const nodeType* const const_iterator;
+	typedef ListBase< DataType, NodeType > ThisType;
 
 private:
 
-	nodeType* _first;
-	nodeType* _last;
+	NodeType* _first;
+	NodeType* _last;
 
 public:
 
@@ -28,60 +24,53 @@ public:
 		: _first( NULL )
 		, _last( NULL ) {}
 
-	virtual void insert( dataType data ) = 0;
+
+	~ListBase()
+	{
+		if ( _last == NULL )
+		{
+			return;
+		}
+
+		_first->setPrevious( NULL );
+
+		NodeType* node = NULL;
+
+		for ( node = last(); node->previous() != NULL; node = node->previous() )
+		{
+			delete node;
+		}
+
+		delete node;
+	}
+
+	virtual void insert( DataType data ) = 0;
 
 	virtual void print() = 0;
 
 	virtual void printReverse() = 0;
 
-	nodeType* first()
+	NodeType* first()
 	{
 		return _first;
 	}
 
-	void setFirst( nodeType* newNode )
+	void setFirst( NodeType* newNode )
 	{
 		_first = newNode;
 	}
 
-	nodeType* last()
+	NodeType* last()
 	{
 		return _last;
 	}
 
-	void setLast( nodeType* newNode )
+	void setLast( NodeType* newNode )
 	{
 		_last = newNode;
 	}
-
-	iterator begin()
-	{
-		return _first;
-	}
-
-	const_iterator being() const
-	{
-		return _first;
-	}
-
-	iterator end()
-	{
-		return _last;
-	}
-
-	const_iterator end() const
-	{
-		return _last;
-	}
-
 };
 
-template< typename nodeType >
-typename nodeType::const_iterator operator++( const nodeType& node )
-{
-	typename nodeType::const_iterator temp = node.next();
-	return temp;
-}
 
 } // namespace Containters
 

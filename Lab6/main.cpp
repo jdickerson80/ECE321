@@ -17,7 +17,7 @@ int main()
 
 	for ( ; looper < ListSize; ++looper )
 	{
-		myList.insert( rand() % 100 );
+		myList.insert( rand() % 10000 );
 	}
 
 	myList.print();

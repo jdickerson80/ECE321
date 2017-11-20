@@ -7,25 +7,25 @@
 
 namespace Containters {
 
-template< typename dataType >
-class DLList : public ListBase< dataType, Nodes::DLLNode< dataType > >
+template< typename DataType >
+class DLList : public ListBase< DataType, Nodes::DLLNode< DataType > >
 {
 public:
 
-	typedef Nodes::DLLNode< dataType > NodeType;
-	typedef DLList< dataType > ThisType;
+	typedef Nodes::DLLNode< DataType > NodeType;
+	typedef DLList< DataType > ThisType;
 	typedef void (*SortingFunction)( ThisType* );
 
 private:
 
-	typedef ListBase< dataType, NodeType > BaseType;
+	typedef ListBase< DataType, NodeType > BaseType;
 
 public:
 
 	DLList()
 		: BaseType() {}
 
-	void insert( dataType data )
+	void insert( DataType data )
 	{
 		NodeType* newNode = new NodeType( data );
 
