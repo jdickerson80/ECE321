@@ -3,14 +3,14 @@
 #include <time.h>
 #include <cstdlib>
 
-#define ListSize ( 100 )
+#define ListSize ( 10 )
 
 using namespace std;
 
 int main()
 {
 	srand( time( NULL ) );
-	typedef Containters::DLList< int > IntList;
+	typedef Containers::DLList< int > IntList;
 	IntList myList;
 
 	int looper = 0;
@@ -25,6 +25,5 @@ int main()
 	printf("reverse order: \r\n");
 
 	myList.printReverse();
-
-	return 0;
+//	return 0;
 }

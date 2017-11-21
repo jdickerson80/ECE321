@@ -62,7 +62,7 @@ public:
                 node = node->next();
             } while ( node != BaseType::first() );
 
-            printf("\r\n");
+			printf("\r\n");
         }
     }
 
@@ -76,7 +76,7 @@ public:
         }
         else
         {
-            printf( "The contents of the list are: " );
+			printf( "The contents of the list in reverse are: " );
 
             do
             {
@@ -84,7 +84,7 @@ public:
                 node = node->previous();
             } while ( node != BaseType::last() );
 
-            printf("\r\n");
+			printf("\r\n");
         }
     }
 

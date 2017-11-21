@@ -7,14 +7,14 @@
 
 using namespace std;
 
-typedef Containters::DLList< int > IntList;
+typedef Containers::DLList< int > IntList;
 
 void bubbleSort( IntList* list );
 
 int main()
 {
 	srand( time( NULL ) );
-	typedef Containters::DLList< int > IntList;
+	typedef Containers::DLList< int > IntList;
 	IntList myList;
 
 	int looper = 0;
