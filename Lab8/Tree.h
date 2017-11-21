@@ -11,21 +11,21 @@ namespace Tree {
 template< typename DataType >
 struct Node
 {
-	DataType data;
-	Node* left;
-	Node* right;
+    DataType data;
+    Node* left;
+    Node* right;
 
-	Node()
-		: data( 0 )
-		, left( NULL )
-		, right( NULL )
-	{}
+    Node()
+        : data( 0 )
+        , left( NULL )
+        , right( NULL )
+    {}
 
-	Node( DataType data, Node* left = NULL, Node* right = NULL )
-		: data( data )
-		, left( left )
-		, right( right )
-	{}
+    Node( DataType data, Node* left = NULL, Node* right = NULL )
+        : data( data )
+        , left( left )
+        , right( right )
+    {}
 };
 
 
@@ -33,72 +33,115 @@ struct Functions
 {
 private:
 
-	Functions();
+    Functions();
 
 public:
-	template< typename Tree >
-	static int depth( Tree tree )
-	{
-		if ( tree == NULL )
-		{
-			return 0;
-		}
+    template< typename Tree >
+    static int depth( Tree tree )
+    {
+        if ( tree == NULL )
+        {
+            return 0;
+        }
 
-		return 1 + std::max( depth( tree->left ), depth( tree->right ) );
-	}
+        return 1 + std::max( depth( tree->left ), depth( tree->right ) );
+    }
 
-	template< typename Tree, typename DataType >
-	static void balancedTreeInsert( Tree* tree, DataType data )
-	{
-		if ( *tree == NULL )
-		{
-			*tree = new Node< DataType >( data );
-		}
-		else
-		{
-			int leftSize = depth( (*tree)->left );
-			int rightSize = depth( (*tree)->right );
+    template< typename Tree >
+    static int numberOfLeaves( Tree tree )
+    {
+        if ( tree->left == NULL && tree->right == NULL )
+        {
+            return 1;
+        }
 
-			if ( leftSize <= rightSize )
-			{
-				balancedTreeInsert( &(*tree)->left, data );
-			}
-			else
-			{
-				balancedTreeInsert( &(*tree)->right, data );
-			}
-		}
-	}
+        int leafNumber = 0;
 
-	template< typename Tree >
-	static void printDepthTraverse( Tree tree )
-	{
-		if ( tree == NULL )
-		{
-			return;
-		}
+        if ( tree->left )
+        {
+            leafNumber += numberOfLeaves( tree->left );
+        }
 
-		printf( "%d, ", tree->data );
+        if ( tree->right )
+        {
+            leafNumber += numberOfLeaves( tree->right );
+        }
 
-		printDepthTraverse( tree->left );
-		printDepthTraverse( tree->right );
-	}
+        return leafNumber;
+    }
 
-	template< typename Tree >
-	static float calculateProduct( Tree tree )
-	{
-		if ( tree == NULL )
-		{
-			return 1.0;
-		}
+    template< typename Tree, typename DataType >
+    static void balancedTreeInsert( Tree* tree, DataType data )
+    {
+        if ( *tree == NULL )
+        {
+            *tree = new Node< DataType >( data );
+        }
+        else
+        {
+            int leftSize = depth( (*tree)->left );
+            int rightSize = depth( (*tree)->right );
 
-		float product = tree->data;
+            if ( leftSize <= rightSize )
+            {
+                balancedTreeInsert( &(*tree)->left, data );
+            }
+            else
+            {
+                balancedTreeInsert( &(*tree)->right, data );
+            }
+        }
+    }
 
-		product *= calculateProduct( tree->left );
-		product *= calculateProduct( tree->right );
+    template< typename Tree, typename DataType >
+    static void binarySearchTreeInsert( Tree* tree, DataType data )
+    {
+        if ( *tree == NULL )
+        {
+            *tree = new Node< DataType >( data );
+        }
+        else
+        {
+            if ( data > (*tree)->data )
+            {
+                binarySearchTreeInsert( &(*tree)->right, data );
+            }
+            else
+            {
+                binarySearchTreeInsert( &(*tree)->left, data );
+            }
+        }
+    }
 
-		return product;
-	}
+    template< typename Tree >
+    static void printDepthTraverse( Tree tree )
+    {
+        if ( tree == NULL )
+        {
+            return;
+        }
+
+        printf( "%d, ", tree->data );
+
+        printDepthTraverse( tree->left );
+        printDepthTraverse( tree->right );
+    }
+
+    template< typename Tree >
+    static float calculateProduct( Tree tree )
+    {
+        if ( tree == NULL )
+        {
+            return 1.0;
+        }
+
+        float product = tree->data;
+
+        product *= calculateProduct( tree->left );
+        product *= calculateProduct( tree->right );
+
+        return product;
+    }
 };
 
 } // typename Tree
