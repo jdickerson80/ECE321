@@ -1,23 +1,45 @@
 #include <stdio.h>
-#include <time.h>
-#include <cstdlib>
 #include "../Lab6/List.h"
 
-using namespace std;
-
+typedef Containers::DLList< int > IntDLLList;
 
 int main()
 {
-	srand( time( NULL ) );
+	FILE* inFile = fopen( "../ECE321Repo/Lab11/INFILE.txt", "r" );
+	FILE* outFile = fopen( "../ECE321Repo/Lab11/OUTFILE.txt", "w" );
+
+	if ( !inFile )
+	{
+		printf( "Cannot open the input file.\r\n" );
+		return -1;
+	}
+
+	IntDLLList intList;
 
 	int input;
 
-	FILE* fin = fopen( "INFILE.txt", "r" );
-//	FILE* fout = fopen( "INFILE.txt", "w" );
+	while ( fscanf( inFile, "%d", &input ) != EOF )
+	{
+		intList.insert( input );
+	}
 
-	printf("%p\r\n", fin );
+	intList.print();
 
-	fscanf( fin, "%d", &input );
+	bool first = true;
 
-	printf("%d\r\n", input );
+	while ( !intList.isEmpty() )
+	{
+		if ( first )
+		{
+			fprintf( outFile, "%d\r\n", intList.first()->data() );
+			intList.popFront();
+		}
+		else
+		{
+			fprintf( outFile, "%d\r\n", intList.last()->data() );
+			intList.popRear();
+		}
+
+		first = !first;
+	}
 }

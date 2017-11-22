@@ -27,19 +27,19 @@ public:
 
     ~ListBase()
     {
-		if ( _last == NULL )
-		{
-			return;
-		}
+        if ( _last == NULL )
+        {
+            return;
+        }
 
-		NodeType* node = first();
+        NodeType* node = first();
 
-		for ( node = first(); node != last(); node = node->next() )
-		{
-			delete node;
-		}
+        for ( node = first(); node != last(); node = node->next() )
+        {
+            delete node;
+        }
 
-		delete node;
+        delete node;
     }
 
     virtual void insert( DataType data ) = 0;
@@ -67,9 +67,33 @@ public:
     {
         _last = newNode;
     }
+
+    bool isEmpty() const
+    {
+        return _first == NULL || _last == NULL;
+    }
+
+    void popFront()
+    {
+        if ( first() == last() )
+        {
+            delete first();
+
+            setFirst( NULL );
+            setLast( NULL );
+        }
+        else
+        {
+            NodeType* node = first()->next();
+
+            delete first();
+
+            setFirst( node );
+        }
+    }
 };
 
 
-} // namespace Containters
+} // namespace Containers
 
 #endif

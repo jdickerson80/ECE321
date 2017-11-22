@@ -25,5 +25,5 @@ int main()
 	printf("reverse order: \r\n");
 
 	myList.printReverse();
-//	return 0;
+	return 0;
 }

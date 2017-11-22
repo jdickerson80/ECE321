@@ -62,7 +62,7 @@ public:
                 node = node->next();
             } while ( node != BaseType::first() );
 
-			printf("\r\n");
+            printf("\r\n");
         }
     }
 
@@ -76,7 +76,7 @@ public:
         }
         else
         {
-			printf( "The contents of the list in reverse are: " );
+            printf( "The contents of the list in reverse are: " );
 
             do
             {
@@ -99,6 +99,24 @@ public:
         sortingFunction( this );
     }
 
+    void popRear()
+    {
+        if ( BaseType::first() == BaseType::last() )
+        {
+            delete BaseType::first();
+
+            BaseType::setFirst( NULL );
+            BaseType::setLast( NULL );
+        }
+        else
+        {
+            NodeType* node = BaseType::last()->previous();
+
+            delete BaseType::last();
+
+            BaseType::setLast( node );
+        }
+    }
 };
 
 template< typename DataType >
